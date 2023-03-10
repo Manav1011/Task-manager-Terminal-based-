@@ -9,4 +9,6 @@ status = "pending"
 
 conn.execute("Insert into tasks (title, description, status) values(?,?,?)",(title,desc,status))
 conn.commit()
+print()
+print()
 print("Task added.")
