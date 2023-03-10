@@ -22,6 +22,10 @@ try:
     if len(args) > 1 and args[1] == 'update':
         arg2 = args[2] if len(args) > 2 else ''
         subprocess.run(['python', '/home/manav1011/Documents/Python-Tasks-Terminal/update.py', arg2])
+    if len(args) > 1 and args[1] == 'help':        
+        subprocess.run(['python', '/home/manav1011/Documents/Python-Tasks-Terminal/help.py'])
+    if len(args) == 1:
+        subprocess.run(['python', '/home/manav1011/Documents/Python-Tasks-Terminal/help.py'])
 
 except:
     pass
