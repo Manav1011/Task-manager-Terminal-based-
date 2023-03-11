@@ -32,8 +32,8 @@ else:
 rows = cursor.fetchall()
 if rows is not None and len(rows) > 0:
     for row in rows:
-        table.add_row([row[0], row[1] if len(row[1]) < 40 else row[1][:40]+'...', row[2] if len(row[2]) < 40 else row[2][:40]+'...', row[3],row[4]])
-
+        table.add_row([row[0], row[1].replace('\n','') if len(row[1]) < 40 else row[1][:40]+'...'.replace('\n',''), row[2].replace('\n','') if len(row[2]) < 40 else row[2][:40]+'...'.replace('\n',''), row[3],row[4]])
+    print()
     print(table)
 else:
     print("No Records Found")
