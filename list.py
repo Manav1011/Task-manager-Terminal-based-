@@ -15,6 +15,8 @@ cursor = None
 if arg and type(arg) == str:    
     if arg == 'completed':
         cursor = conn.execute("SELECT * FROM tasks where date=DATE(CURRENT_TIMESTAMP) and status='completed'")
+    elif arg == 'pending':
+        cursor = conn.execute("SELECT * FROM tasks where date=DATE(CURRENT_TIMESTAMP) and status='pending'")
     elif arg == 'kalna':
         cursor = conn.execute("SELECT * FROM tasks where date=date('now', '-1 day')")
     elif arg == 'paramdivas':
@@ -27,7 +29,9 @@ if arg and type(arg) == str:
         print("Provide a valid argument")
         sys.exit()
 else:
-    cursor = conn.execute("SELECT * FROM tasks where date=DATE(CURRENT_TIMESTAMP) and status='pending'")
+    conn.execute('update tasks set date=DATE(CURRENT_TIMESTAMP) where status="pending"')
+    conn.commit()
+    cursor = conn.execute("SELECT * FROM tasks where date=DATE(CURRENT_TIMESTAMP)")
 
 rows = cursor.fetchall()
 if rows is not None and len(rows) > 0:
