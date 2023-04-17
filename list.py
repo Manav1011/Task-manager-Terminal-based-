@@ -1,6 +1,7 @@
 from init import *
 from prettytable import PrettyTable
 import sys
+from cal import get_date
 
 # Create a new table object
 table = PrettyTable()
@@ -17,13 +18,13 @@ if arg and type(arg) == str:
         cursor = conn.execute("SELECT * FROM tasks where date=DATE(CURRENT_TIMESTAMP) and status='completed'")
     elif arg == 'pending':
         cursor = conn.execute("SELECT * FROM tasks where date=DATE(CURRENT_TIMESTAMP) and status='pending'")
-    elif arg == 'kalna':
-        cursor = conn.execute("SELECT * FROM tasks where date=date('now', '-1 day')")
-    elif arg == 'paramdivas':
-        cursor = conn.execute("SELECT * FROM tasks where date=date('now', '-2 day')")
+    elif arg == 'not_posted':
+        cursor = conn.execute("SELECT * FROM tasks where posted=0;")
+    elif arg == 'from':
+        date = get_date()
+        cursor = conn.execute("SELECT * FROM tasks where date>=?",(date,))
     elif arg == 'date':
-        print("Use yyyy-mm-dd format")
-        date = input("Enter the date: ")
+        date = get_date()
         cursor = conn.execute("SELECT * FROM tasks where date=?",(date,))
     else:
         print("Provide a valid argument")

@@ -7,7 +7,8 @@ try:
     title TEXT NOT NULL,
     description TEXT NOT NULL,
     date DATE DEFAULT CURRENT_DATE,
-    status VARCHAR(10) NOT NULL CHECK (status IN ('pending', 'completed'))
+    status VARCHAR(10) NOT NULL CHECK (status IN ('pending', 'completed')),
+    posted INTEGER
     );''')
 except Exception as e:
     print("You have already initialized the app")
